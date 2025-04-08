@@ -1,6 +1,7 @@
 package com.ksoft.evagas_back.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,11 @@ public class VagasService {
 		vagasRepository.deleteById(idVaga);
 	}
 	
-	
-
+	public Optional<VagaDto> getVagaById(Long id) {
+		Optional<Vaga> optVaga = vagasRepository.findById(id);
+		if(!optVaga.isPresent()) {
+			return Optional.empty();
+		}
+		return Optional.of(optVaga.get().toDto());
+	}
 }
