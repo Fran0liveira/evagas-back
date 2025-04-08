@@ -15,52 +15,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ksoft.evagas_back.domain.usuario.UsuarioDto;
-import com.ksoft.evagas_back.domain.vagas.Vaga;
-import com.ksoft.evagas_back.domain.vagas.VagaDto;
-import com.ksoft.evagas_back.service.VagasService;
+import com.ksoft.evagas_back.service.UsuariosService;
 
 @RestController
-@RequestMapping("/vagas")
-public class VagasController {
+@RequestMapping("/usuarios")
+public class UsuarioController {
 	
 	@Autowired
-	private VagasService vagasService;
+	private UsuariosService usuariosService;
 	
 	@GetMapping
-	public ResponseEntity<?> getVagas()
+	public ResponseEntity<?> getUsuarios() 
 	{
-		List<VagaDto> vagas = vagasService.getVagas();
-		return ResponseEntity.ok(vagas);
+		List<UsuarioDto> usuarios = usuariosService.getUsuarios();
+		return ResponseEntity.ok(usuarios);
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> salvarVaga(@RequestBody VagaDto vaga)
-	{
-		VagaDto vagaSalva = vagasService.salvarVaga(vaga);
-		return ResponseEntity.ok(vagaSalva);
+	public ResponseEntity<?> salvarUsuario(@RequestBody UsuarioDto usuario){
+		UsuarioDto usuarioSalvo = usuariosService.salvarUsuario(usuario);
+		return ResponseEntity.ok(usuarioSalvo);
 	}
 	
 	@PutMapping
-	public ResponseEntity<?> updateVaga(@RequestBody VagaDto vaga)
-	{
-		VagaDto vagaSalva = vagasService.updateVaga(vaga);
-		return ResponseEntity.ok(vagaSalva);
+	public ResponseEntity<?> atualizarUsuario(@RequestBody UsuarioDto usuario){
+		UsuarioDto usuarioAtualizado = usuariosService.atualizarUsuario(usuario);
+		return ResponseEntity.ok(usuarioAtualizado);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deleteVaga(@PathVariable("id") Long id)
-	{
-		vagasService.deleteVaga(id);
+	public ResponseEntity<?> deletarUsuario(@PathVariable Long id){
+		usuariosService.deletarUsuario(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getVagaById(@PathVariable Long id){
-		Optional<VagaDto> vaga = vagasService.getVagaById(id);
-		if(vaga.isEmpty()) {
+	public ResponseEntity<?> getUsuarioById(@PathVariable Long id){
+		Optional<UsuarioDto> usuario = usuariosService.getUsuarioById(id);
+		if(usuario.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.ok(vaga);
+		return ResponseEntity.ok(usuario);
 	}
+	
 
 }
