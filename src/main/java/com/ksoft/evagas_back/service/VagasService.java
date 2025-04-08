@@ -18,7 +18,6 @@ public class VagasService {
 	
 	public List<VagaDto> getVagas()
 	{
-		System.out.println("CriANDO BRaNCH dev");
 		return vagasRepository.findAll()
 				.stream()
 				.map(v-> v.toDto()
