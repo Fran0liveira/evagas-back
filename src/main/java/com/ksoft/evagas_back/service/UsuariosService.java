@@ -49,5 +49,14 @@ public class UsuariosService {
 		}
 		return Optional.of(optUsuario.get().toDto());
 	}
+	
+	public Optional<UsuarioDto> getUsuarioByEmail(String email) 
+	{
+		Optional<Usuario> optUsuario = usuarioRepository.findByEmail(email);
+		if(!optUsuario.isPresent()) {
+			return Optional.empty();
+		}
+		return Optional.of(optUsuario.get().toDto());
+	}
 
 }
